@@ -17,7 +17,7 @@ def create_map():
     return map
    
 player_map = create_map()
- 
+fight_started = False
 enemy_map = create_map()
 effect_list = []
 ship_list = []
