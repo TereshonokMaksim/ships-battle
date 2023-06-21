@@ -1,0 +1,13 @@
+{
+    "workbench.editor.autoLockGroups": {
+        "default": true,
+        "workbench.editorinputs.searchEditorInput": true,
+        "imagePreview.previewEditor": true,
+        "jsProfileVisualizer.cpuprofile.table": true
+    },
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "workbench.editor.labelFormat": "default",
+    "workbench.editor.openPositioning": "left",
+    "workbench.editor.highlightModifiedTabs": false,
+    "workbench.editor.historyBasedLanguageDetection": true
+}
