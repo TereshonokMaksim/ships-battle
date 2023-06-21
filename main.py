@@ -20,9 +20,9 @@ data.unplaced_ship = ship.Ship("four_decker", "player", [0,0,0], None, 0)
 pygame.display.set_caption("Морський бій")
 pygame.display.set_icon(pygame.image.load(path.path_to_file("images\\another\\icon.png")))
 
-button_reset = button.Button(x = 700, y = 20, text = "RESET")
-button_ok = button.Button(x = 700, y = 100, text = "OK")
-button_done = button.Button(x = 400, y = 317, tex = "DONE")
+# button_reset = button.Button(x = 700, y = 20, text = "RESET")
+# button_ok = button.Button(x = 700, y = 100, text = "OK")
+# button_done = button.Button(x = 400, y = 317, tex = "DONE")
 
 FPS = 60
 step = "player"
