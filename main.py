@@ -8,6 +8,8 @@ import modules.shoot as sh
 import modules.bot as bot
 import modules.music as music
 import modules.win as win
+import modules.button as button
+
 pygame.init()
 
 bot.place_bot_ships()
@@ -16,12 +18,11 @@ screen = pygame.display.set_mode((1000, 700))
 data.unplaced_ship = ship.Ship("four_decker", "player", [0,0,0], None, 0)
 
 pygame.display.set_caption("Морський бій")
-letter_list = ["a","b","c","d","e","f","g","h","i","j"]
-for letter in range(10):
-    for number in range(10):
-        if data.enemy_map[letter][number] == 1:
-            print(f"Ship - ({letter_list[letter]}{number+1})")
 pygame.display.set_icon(pygame.image.load(path.path_to_file("images\\another\\icon.png")))
+
+button_reset = button.Button(x = 700, y = 20, text = "RESET")
+button_ok = button.Button(x = 700, y = 100, text = "OK")
+button_done = button.Button(x = 400, y = 317, tex = "DONE")
 
 FPS = 60
 step = "player"

@@ -83,7 +83,7 @@ def bot_shoot(repeater):
     shoot_place = True
     busy=0
     # print(shoot, target, len(sides), repeat)
-    if repeater % 30 == 0:
+    if repeater % 15 == 0:
         if target == "Ship":
             print(line)
             if line == 0:
