@@ -1,5 +1,5 @@
 import pygame, modules.data_base as data, modules.path_file as path, modules.effects as effect
-
+#Перевод и стрельба
 def hover_and_shoot(click):
     return_data = False
     # Блок главного условия и создания главных переменных

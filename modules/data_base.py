@@ -18,6 +18,7 @@ def create_map():
    
 player_map = create_map()
 fight_started = False
+volume = 0.7
 enemy_map = create_map()
 effect_list = []
 ship_list = []

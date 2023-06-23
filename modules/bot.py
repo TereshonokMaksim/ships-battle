@@ -2,15 +2,17 @@ import modules.data_base as data
 import modules.ship as ship
 import modules.effects as effect
 import pygame, random
+#Расттановка кораблей бота
 def place_bot_ships():
     
     data.unplaced_ship = ship.Ship("four_decker", "enemy", [0,0,0], None, 0)
     ships = ["three_decker", "three_decker", "two_decker",
          "two_decker","two_decker", "one_decker",
          "one_decker","one_decker", "one_decker"]
+    #проверка клеток
     def check_cells():
         if len(data.unplaced_ship.CELL) == 2: 
-            if data.unplaced_ship.TYPE == "one_decker":     lenght = 1
+            if   data.unplaced_ship.TYPE == "one_decker":   lenght = 1
             elif data.unplaced_ship.TYPE == "two_decker":   lenght = 2
             elif data.unplaced_ship.TYPE == "three_decker": lenght = 3
             elif data.unplaced_ship.TYPE == "four_decker":  lenght = 4
@@ -25,7 +27,7 @@ def place_bot_ships():
                         if data.enemy_map[data.unplaced_ship.CELL[0] + side[0] * cell][data.unplaced_ship.CELL[1] + side[1] * cell] == 0:
                             check_list += 1
             return check_list == lenght
-
+    #расстановка по клеткам
     def place_stop_cells():
         if data.unplaced_ship.TYPE == "one_decker":     lenght = 1
         elif data.unplaced_ship.TYPE == "two_decker":   lenght = 2

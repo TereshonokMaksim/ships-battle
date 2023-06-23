@@ -1,4 +1,5 @@
 import pygame, modules.data_base as data, modules.path_file as path, modules.place_player_ships as place, modules.bot as bot, modules.music as music, modules.ship as ship
+#Класс кнопки
 class Button:
     def __init__(self, x = 0, y = 0, width = 200, height = 66, text = 0, action = None, state = "hidden"):
         self.X = x
@@ -8,6 +9,7 @@ class Button:
         self.TEXT = text
         self.ACTION = action
         self.STATE = state
+    #Проверка кликов
     def check_click(self, act):
         return_info = None
         if (self.X < pygame.mouse.get_pos()[0] < self.X + self.WIDTH and
@@ -27,7 +29,7 @@ class Button:
         elif self.STATE == "click" or self.STATE == "up": screen.blit(pygame.transform.scale(pygame.image.load(path.path_to_file("images\\another\\button_pressed.png")), (self.WIDTH, self.HEIGHT)), (self.X, self.Y))
         if self.STATE != "showed" and self.STATE != "hidden": pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
         screen.blit(font.render(self.TEXT, True,(0, 0, 0)), (self.X + self.WIDTH // 20, self.Y + self.HEIGHT - self.HEIGHT // 5))
-
+#Створення Кнопки "reset"
 def reset():
     def create_map():
         map = [[]]

@@ -8,6 +8,7 @@ ships = ["three_decker", "three_decker", "two_decker",
          "one_decker","one_decker", "one_decker"]
 ship_num = 0
 rotate_press = 0
+#Функция выбора кораблей
 def choose_ship():
     global ship_num
     if ship_num < 10:
@@ -30,7 +31,7 @@ def choose_ship():
                 print(f"choose succeful (vert), angle = {data.unplaced_ship.ANGLE}")
         else:
             print(f'choose failed. More:\n   Angle: {data.unplaced_ship.ANGLE}, \n   X Mouse/X Min/X Max: {pygame.mouse.get_pos()[0]}/16/{16+y_max} or 48,\n   Y Mouse/Y min/Y max: {pygame.mouse.get_pos()[1]}/16/{16 + y_max} or 48')
-                    
+#Функция поворота кораблей           
 def rotate_ship():
     global rotate_press, ship_num
     if ship_num < 10:
@@ -43,6 +44,7 @@ def rotate_ship():
                 if data.unplaced_ship.ANGLE < -270:
                     data.unplaced_ship.ANGLE = 0
         else: rotate_press = 0; #print(pygame.key.get_pressed()[pygame.K_r])
+#Функция передвежения кораблей
 def move_ship():
     if ship_num < 10:
         
@@ -68,7 +70,7 @@ def move_ship():
                 data.unplaced_ship.CELL = [0,0,0]
                 data.unplaced_ship.X = pygame.mouse.get_pos()[0]
                 data.unplaced_ship.Y = pygame.mouse.get_pos()[1]
-
+#Функция проверки клеток
 def check_cells():
     if len(data.unplaced_ship.CELL) == 2: 
         if data.unplaced_ship.TYPE == "one_decker":     lenght = 1
@@ -86,7 +88,7 @@ def check_cells():
                     if data.player_map[data.unplaced_ship.CELL[0] + side[0] * cell][data.unplaced_ship.CELL[1] + side[1] * cell] == 0:
                         check_list += 1
         return check_list == lenght
-
+#Функция расстановки кораблей по клеткам
 def place_stop_cells():
     if data.unplaced_ship.TYPE == "one_decker":     lenght = 1
     elif data.unplaced_ship.TYPE == "two_decker":   lenght = 2
@@ -109,6 +111,7 @@ def place_stop_cells():
             if side_cells[3] and data.unplaced_ship.CELL[1] - 1 > -1:
                 data.player_map[data.unplaced_ship.CELL[0] + side[0] * cell][data.unplaced_ship.CELL[1] - 1] = 2
             data.player_map[data.unplaced_ship.CELL[0] + side[0] * cell][data.unplaced_ship.CELL[1] + side[1] * cell] = 2
+#Заверщать расттановку
 def end_place():
     global ship_num
     global ships
@@ -119,6 +122,7 @@ def end_place():
         data.unplaced_ship.X =  16
         data.unplaced_ship.Y = 16
     ship_num += 1
+#Расттановка кораблей
 def place_ship():
     print(f"Placing... Cell: {data.unplaced_ship.CELL}")
     approval_to_place = check_cells()

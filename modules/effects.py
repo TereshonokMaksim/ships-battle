@@ -1,11 +1,15 @@
 import pygame, modules.path_file as path
+import modules.data_base as data
 pygame.mixer.init()
+#Класс эффект
 class Effect:
+    #Метод конструктор
     def __init__(self, effect, cors):
         self.EFFECT = effect
         self.TIME = 0
         self.SOUND_PASSER = 0
         self.SOUND = pygame.mixer.Sound(path.path_to_file(f"sounds\\{effect}_sound_effect.mp3"))
+        self.SOUND.set_volume(data.volume)
         self.CORS = cors
         self.play_sound()
     def play_sound(self):

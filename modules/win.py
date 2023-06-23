@@ -3,6 +3,7 @@ player_ship_cells = 100
 enemy_ship_cells = 100
 scan_finished = 0
 win_sound_played = 0
+#Сканирование кораблей ячеек
 def scan_ship_cells():
     global scan_finished, enemy_ship_cells, player_ship_cells
     if scan_finished + 1 == True:
@@ -17,6 +18,7 @@ def scan_ship_cells():
                 if cell == 1:
                     enemy_ship_cells += 1
         scan_finished = 1
+#Сканирование победы
 def scan_victory(frame):
     if frame % 60 == 0:
         global enemy_ship_cells, player_ship_cells
@@ -36,6 +38,7 @@ def scan_victory(frame):
             return "player"
         elif player_exploded_ship_cells >= player_ship_cells:
             return "enemy"
+#Победный экран
 def win_screen(winner, screen):
     global win_sound_played
     if winner == "enemy":

@@ -28,6 +28,7 @@ t=0
 repeat = 0
 main = True
 mouse_press = False
+mouse_click = False
 mouse = False
 winner = None
 while main:
@@ -38,18 +39,22 @@ while main:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   
             main = False 
-        if winner == None:
-            if   pygame.key.get_pressed()[pygame.K_MINUS]==1 and t==0: t=1
-            elif pygame.key.get_pressed()[pygame.K_MINUS]==1 and t==1: t=0
-            if event.type == pygame.MOUSEBUTTONDOWN: 
-                place.choose_ship()
-                mouse_press = True
-            elif event.type == pygame.MOUSEBUTTONUP: 
-                if place.ship_num < 10: place.place_ship()
-                mouse_press = "Up"
-            # print(f"Mouse Button Down: {event.type==pygame.MOUSEBUTTONDOWN}; \nMouse Button Up: {event.type==pygame.MOUSEBUTTONUP}")
-            place.rotate_ship()
-            place.move_ship()
+        
+        if   pygame.key.get_pressed()[pygame.K_MINUS]==1 and t==0: t=1
+        elif pygame.key.get_pressed()[pygame.K_MINUS]==1 and t==1: t=0
+        if event.type == pygame.MOUSEBUTTONDOWN: 
+            place.choose_ship()
+            mouse_click = True
+            mouse_press = True
+        elif event.type == pygame.MOUSEBUTTONUP: 
+            if place.ship_num < 10: place.place_ship()
+            mouse_press = "Up"
+            mouse_click = False
+        # print(f"Mouse Button Down: {event.type==pygame.MOUSEBUTTONDOWN}; \nMouse Button Up: {event.type==pygame.MOUSEBUTTONUP}")
+        place.rotate_ship()
+        place.move_ship()
+        
+    music.blit_slider(screen)
     if winner == None:
         if place.ship_num >= 10:
             win.scan_ship_cells()
@@ -67,6 +72,6 @@ while main:
                 step = "player"
     
         # ship.place_ship()
-    
+    music.move_slider_button(mouse_click)
     pygame.display.flip()
     repeat += 1

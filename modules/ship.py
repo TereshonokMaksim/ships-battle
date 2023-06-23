@@ -1,7 +1,7 @@
 import pygame
 import modules.data_base as data
 import modules.path_file as path
-
+#Класс корабль
 class Ship:
     def __init__(self, type, side, cell, state, angle):
         self.TYPE = type
@@ -11,6 +11,7 @@ class Ship:
         self.ANGLE = angle
         self.X = 0
         self.Y = 0
+    #расттановка корабля
     def place_ship(self):
         if self.TYPE == "one_decker":
             lenght = 1
@@ -35,6 +36,7 @@ class Ship:
                 self.X = 650
         self.Y = 300 + 32 * self.CELL[0]
         self.X += 32 * self.CELL[1]
+    #Отображение корабля
     def blit_ship(self, screen, file=0):
         if self.TYPE == "one_decker":
             lenght = 1
