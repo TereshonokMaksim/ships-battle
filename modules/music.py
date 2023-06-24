@@ -35,13 +35,13 @@ def move_slider_button(mouse_pressed):
     if (slider_x < pygame.mouse.get_pos()[0] < slider_x + slider_width and
         slider_y < pygame.mouse.get_pos()[1] < slider_y + slider_height or
         slider_button_state == "click"):
-        print("in slider")
+        # print("in slider")
         if (slider_button_x - slider_button_width // 2  < pygame.mouse.get_pos()[0] < slider_button_x + slider_button_width // 2 and
             slider_button_y - slider_button_height // 2 < pygame.mouse.get_pos()[1] < slider_button_y + slider_button_height // 2 or
             slider_button_state == "click"):
-            print("in slider button")
+            # print("in slider button")
             if mouse_pressed == True:
-                print("click")
+                # print("click")
                 data.volume = (pygame.mouse.get_pos()[0] - slider_x) // (slider_width // 100) / 100
                 slider_button_x = pygame.mouse.get_pos()[0]
                 slider_button_state = "click"
@@ -57,17 +57,16 @@ def move_slider_button(mouse_pressed):
                 mouse = pygame.SYSTEM_CURSOR_HAND
         else:
             slider_button_state = None
-            mouse = pygame.SYSTEM_CURSOR_ARROW
-            print("no slider button")
+            mouse = False
+            # print("no slider button")
     else: 
         slider_button_state = None
-        mouse = pygame.SYSTEM_CURSOR_ARROW
-        print("Nope")
+        mouse = False
+        # print("Nope")
 
 def blit_slider(screen):
     global slider_button_state, slider_button_x, slider_button_y, slider_button_width, slider_button_height, slider_x, slider_y, slider_width, slider_height, mouse
     screen.blit(pygame.transform.scale(pygame.image.load(path.path_to_file("images\\another\\slider.png")), (slider_width, slider_height)), (slider_x, slider_y))
     screen.blit(pygame.transform.scale(pygame.image.load(path.path_to_file("images\\another\\slider_button.png")), (slider_button_width, slider_button_height)), (slider_button_x - slider_button_width // 2, slider_button_y - slider_button_height // 2))
-    pygame.mouse.set_cursor(mouse)
     font = pygame.font.Font(path.path_to_file("font\\EightBits.ttf"), 32)
     screen.blit(font.render(f"{int(data.volume*100//1)}%", True, (0, 0, 0)), (slider_x + slider_width / 2, slider_y + slider_height * 1.5))

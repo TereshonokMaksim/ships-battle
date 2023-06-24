@@ -16,6 +16,7 @@ def create_map():
         map.append([])
     return map
    
+winner = None
 player_map = create_map()
 fight_started = False
 volume = 0.7

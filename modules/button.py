@@ -11,24 +11,28 @@ class Button:
         self.STATE = state
     #Проверка кликов
     def check_click(self, act):
-        return_info = None
         if (self.X < pygame.mouse.get_pos()[0] < self.X + self.WIDTH and
             self.Y < pygame.mouse.get_pos()[1] < self.Y + self.HEIGHT):
             if self.STATE != "hidden":
-                if act == "click":
+                if act == True:
                     self.STATE = "click"
-                elif act == "up" and self.STATE == "click":
-                    return_info = self.ACTION()
+                    print("click")
+                elif act == "Up" and self.STATE == "click":
+                    print("act")
+                    self.ACTION()
                     self.STATE == "hidden"
-                elif act == "hover":
+                elif act == False:
+                    print("hover")
                     self.STATE = "hover"     
-        return return_info           
+                else:
+                    print("???")      
     def blit_button(self, screen):
-        font = pygame.font.Font(path.path_to_file("font\\EightBits.ttf"), (self.HEIGHT - self.HEIGHT // 5)// 1.2)
-        if self.STATE == "showed": screen.blit(pygame.transform.scale(pygame.image.load(path.path_to_file("images\\another\\button_unpressed.png")), (self.WIDTH, self.HEIGHT)), (self.X, self.Y))
-        elif self.STATE == "click" or self.STATE == "up": screen.blit(pygame.transform.scale(pygame.image.load(path.path_to_file("images\\another\\button_pressed.png")), (self.WIDTH, self.HEIGHT)), (self.X, self.Y))
-        if self.STATE != "showed" and self.STATE != "hidden": pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
-        screen.blit(font.render(self.TEXT, True,(0, 0, 0)), (self.X + self.WIDTH // 20, self.Y + self.HEIGHT - self.HEIGHT // 5))
+        return_data = False
+        font = pygame.font.Font(path.path_to_file("font\\EightBits.ttf"), 50)
+        if self.STATE != "hidden": screen.blit(pygame.transform.scale(pygame.image.load(path.path_to_file("images\\another\\button_unpressed.png")), (self.WIDTH, self.HEIGHT)), (self.X, self.Y))
+        if self.STATE != "showed" and self.STATE != "hidden": return_data = pygame.SYSTEM_CURSOR_HAND
+        if self.STATE != "hidden": screen.blit(font.render(self.TEXT, True,(0, 0, 0)), (self.X + self.WIDTH // 4, self.Y + self.HEIGHT // 7))
+        return return_data
 #Створення Кнопки "reset"
 def reset():
     def create_map():
@@ -47,10 +51,10 @@ def reset():
     place.ship_num = 0
     music.music_num = 0
     music.music_place = True
-    return "res_click"
+    data.winner = None
 def ok():
     data.fight_started = True
 
-button_reset = Button(x = 700, y = 100, text = "RESET", action = reset)
-button_ok = Button(x = 700, y = 20, text = "OK", action = ok)
+button_reset = Button(x = 400, y = 600, text = "RESET", action = reset, state = "showed")
+button_ok = Button(x = 400, y = 600, text = "OK", action = ok)
 button_done = Button(x = 400, y = 317, text = "DONE", action = reset)

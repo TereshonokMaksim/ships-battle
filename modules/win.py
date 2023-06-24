@@ -20,7 +20,7 @@ def scan_ship_cells():
         scan_finished = 1
 #Сканирование победы
 def scan_victory(frame):
-    if frame % 60 == 0:
+    if frame % 20 == 0:
         global enemy_ship_cells, player_ship_cells
         player_exploded_ship_cells = 0
         enemy_exploded_ship_cells = 0
@@ -48,6 +48,8 @@ def win_screen(winner, screen):
         sound = pygame.mixer.Sound(path.path_to_file(f"sounds\\win_sound-{random.randint(1,2)}.mp3"))
         win_image = pygame.image.load(path.path_to_file("images\\another\\victory_screen.png"))
     if win_sound_played + 1 == True:
-        pygame.mixer.Sound.play(sound)
+        sound.set_volume(data.volume)
+        sound.play()
+
         win_sound_played = 1
     screen.blit(pygame.transform.scale(win_image, pygame.display.get_window_size()), (0,0))

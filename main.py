@@ -30,16 +30,15 @@ main = True
 mouse_press = False
 mouse_click = False
 mouse = False
-winner = None
+cursor = pygame.SYSTEM_CURSOR_ARROW
 while main:
-    if winner == None:
+    if data.winner == None:
         music.play_music(place.ship_num < 10)
         m_field.all_fields(screen, t, repeat)
     mouse_press = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   
             main = False 
-        
         if   pygame.key.get_pressed()[pygame.K_MINUS]==1 and t==0: t=1
         elif pygame.key.get_pressed()[pygame.K_MINUS]==1 and t==1: t=0
         if event.type == pygame.MOUSEBUTTONDOWN: 
@@ -53,25 +52,54 @@ while main:
         # print(f"Mouse Button Down: {event.type==pygame.MOUSEBUTTONDOWN}; \nMouse Button Up: {event.type==pygame.MOUSEBUTTONUP}")
         place.rotate_ship()
         place.move_ship()
+    # Часть кнопок - Начало
+    if repeat % 10 == 0:
+        if place.ship_num >= 10 and data.fight_started == False:
+            button.button_ok.STATE = "showed"
+            button.button_reset.STATE = "hidden"
+        else:
+            button.button_reset.STATE = "showed"
+            button.button_ok.STATE = "hidden"
+        if data.winner == None:
+            button.button_reset.STATE = "showed"
+            button.button_done.STATE = "hidden"
+        else:
+            button.button_reset.STATE = "hidden"
+            button.button_done.STATE = "showed"
         
-    music.blit_slider(screen)
-    if winner == None:
+    if data.winner == None:
         if place.ship_num >= 10:
             win.scan_ship_cells()
-        winner = win.scan_victory(repeat)
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
-    if winner != None:
-        win.win_screen(winner, screen)
+        data.winner = win.scan_victory(repeat)
+        cursor = pygame.SYSTEM_CURSOR_ARROW
+    if data.winner != None:
+        win.win_screen(data.winner, screen)
+    button_ok_data    = button.button_ok.blit_button(screen)
+    button_done_data  = button.button_done.blit_button(screen)
+    button_reset_data = button.button_reset.blit_button(screen)
+
+    if button_ok_data != False:    cursor = button_ok_data   
+    if button_done_data != False:  cursor = button_done_data 
+    if button_reset_data != False: cursor = button_reset_data
+    button.button_ok.check_click(mouse_press)
+    button.button_done.check_click(mouse_press)
+    button.button_reset.check_click(mouse_press)
+    music.blit_slider(screen)
     # sh.hover_and_shoot(mouse_press)
     clock.tick(FPS)
-    if winner == None:
+    if data.winner == None and data.fight_started == True:
         if place.ship_num >= 10:
-            if step == "player" and sh.hover_and_shoot(mouse_press):
+            pl_data = sh.hover_and_shoot(mouse_press)
+            if pl_data[1] != False: cursor = pl_data[1]
+            if step == "player" and pl_data[0] == True:
                 step = "enemy"
             elif step == "enemy" and bot.bot_shoot(repeat):
                 step = "player"
     
         # ship.place_ship()
     music.move_slider_button(mouse_click)
+    if music.mouse != False: cursor = music.mouse
+    # print(cursor)
+    if cursor != None: pygame.mouse.set_cursor(cursor)
     pygame.display.flip()
     repeat += 1
