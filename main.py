@@ -61,7 +61,8 @@ while main:
             button.button_reset.STATE = "showed"
             button.button_ok.STATE = "hidden"
         if data.winner == None:
-            button.button_reset.STATE = "showed"
+            if place.ship_num < 10 or data.fight_started != False:
+                button.button_reset.STATE = "showed"
             button.button_done.STATE = "hidden"
         else:
             button.button_reset.STATE = "hidden"
