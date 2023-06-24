@@ -44,7 +44,7 @@ def all_fields(screen,t, repeat):
         playing_field(screen, 64)
         playing_field(screen, 650)  
         for ship in data.ship_list:
-            # if ship.SIDE == "player":
+            if ship.SIDE == "player":
                 ship.blit_ship(screen,t)      
         for effect in data.effect_list:
             effect.blit_effect(screen)
