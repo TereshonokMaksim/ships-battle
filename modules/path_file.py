@@ -17,6 +17,9 @@ def path_to_file(name_file):
             a=pygame.font.Font(path_to_file_n, 10)
     except:
         # print("path file mode switched to MacOS")
+        path_to_file = path_to_file.split('/')
+        del path_to_file[-1]
+        del path_to_file[-1]    
         path_to_file_n = "/".join(path_to_file)
         name_file = name_file.split("\\")
         name_file = "/".join(name_file)
